@@ -1,0 +1,23 @@
+# domi
+name: Mark stale issues and pull requests
+
+on:
+  schedule:
+  - cron: '26 21 * * *'
+
+jobs:
+  stale:
+
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+    - uses: actions/stale@v5
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        stale-issue-message: 'Stale issue has been created.'
+        stale-pr-message: 'Stale pull request has been created.'
+        stale-issue-label: 'no-issue-activity'
+        stale-pr-label: 'no-pr-activity'
